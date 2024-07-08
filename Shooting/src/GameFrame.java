@@ -35,8 +35,7 @@ public class GameFrame extends MyFrame{
 		for(int i=0; i<GameWorld.enemies.size();i++) {
 			Enemy e=GameWorld.enemies.get(i);
 			e.draw(this);
-			e.move();
-			
+			e.move();	
 		}
 	}
 	public void checkPlayerAndEnemies() {
@@ -63,9 +62,11 @@ public class GameFrame extends MyFrame{
 					if(checkHit(e,b)){
 						System.out.println("あたり");
 						hits++;
-						GameWorld.enemies.remove(j);
+						e.life--;
 					}
-					else {
+					if(e.life<=0) {
+						GameWorld.enemies.remove(j);
+					}else {
 						j++;
 					}
 			}
@@ -75,7 +76,6 @@ public class GameFrame extends MyFrame{
 					else{
 						i++;
 					}
-			
 		}
 	}
 	public boolean checkHit(Character a,Character b) {
